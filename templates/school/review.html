@@ -1,0 +1,167 @@
+{% extends 'school_base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="ContentsFrame">
+	<div class="SchoolName">
+	<span>School Information</span><br />
+	{{found_school.name}}
+	</div>
+	<div class="SchoolFrame">
+		<div class="BOX02">
+			<div class="MTitle">Current Student’s review</div>
+
+			<!-- 학교리뷰보기 -->
+			<div id="CurrentStudentReviewTop" class="ReviewTop" style="display:none;">
+				<li class="Name"></li>
+				<li class="Info">
+					<span class="gradeclass">Grade : <b></b></span>
+					<span>School : <b>{{found_school.name}}</b></span>
+					<span>Home city : <b></b></span>
+				</li>
+				<li class="Contents"></li>
+			</div><!-- ReviewTop -->
+			<div class="EndPart"></div>
+			<!-- 학교리뷰보기 끝 -->
+
+			<!-- 학교리뷰목록 -->
+			<div class="ListTable">
+				<!-- <div class="ListSearch Aright">
+					<div>
+						<select class="SearchSelect">
+							<option>Name</option>
+							<option>Grade</option>
+							<option>School</option>
+							<option>Home City</option>
+						</select>
+					</div>
+					<div><input type="text" class="SearchInput" /></div>
+					<div><input type="submit" value="Search" class="ListSearchButton" /></div>
+				</div> -->
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+					</colgroup>
+					<tr>
+						<th>No</th>
+						<th>Name</th>
+						<th>Grade</th>
+						<th>School</th>
+						<th>Home city</th>
+					</tr>
+					{% for review in current_student_reviews %}
+					<tr>
+						<td>{{review.id}}</td>
+						<td><p class="AgentCurrentStudentReviewClass" id="AgentCurrentStudentReview{{review.id}}" style="color:blue;margin-bottom:0;cursor:pointer;">{{review.student}}</p></td>
+						<td>{{review.grade}}</td>
+						<td>{{review.school}}</td>
+						<td>{{review.homecity}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+
+				<!-- <div class="ListCounter">
+					<a href="">◀</a>
+					<a>...</a>
+					<a href="">1</a>
+					<a href="">2</a>
+					<a href="">3</a>
+					<a href="">4</a>
+					<a href="">5</a>
+					<a>...</a>
+					<a href="">128</a>
+					<a href="">▶</a>
+				</div> -->
+
+
+			</div><!-- ListTable -->
+			<!-- 학교리뷰목록 끝 -->
+
+
+			<div class="EndPart"></div>
+		</div><!-- BOX02 -->
+
+		<div class="BOX02E">
+			<div class="MTitle">Graduated Student’s review</div>
+
+			<!-- 학교리뷰보기 -->
+			<div id="GraduateStudentReviewTop" class="ReviewTop" style="display:none;">
+				<li class="Name"></li>
+				<li class="Info">
+					<span>Years Attended : <b></b></span>
+					<span>College : <b></b></span>
+					<span>Initial English : <b></b><br></span>
+					<span>GPA in China : <b></b></span>
+					<span>TOEFL : <b></b></span>
+					<span>GPA : <b></b></span>
+					<span>SAT / ACT : <b></b></span>
+					<span>Activities : <b></b></span>
+					<span>Major : <b></b></span>
+				</li>
+				<li class="Contents"></li>
+			</div><!-- ReviewTop -->
+			<div class="EndPart"></div>
+			<!-- 학교리뷰보기 끝 -->
+
+			<!-- 학교리뷰목록 -->
+			<div class="ListTable">
+				<!-- <div class="ListSearch Aright">
+					<div>
+						<select class="SearchSelect">
+							<option>Name</option>
+							<option>Years Attended</option>
+							<option>College</option>
+							<option>GPA in China</option>
+						</select>
+					</div>
+					<div><input type="text" class="SearchInput" /></div>
+					<div><input type="submit" value="Search" class="ListSearchButton" /></div>
+				</div> -->
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+					</colgroup>
+					<tr>
+						<th>No</th>
+						<th>Name</th>
+						<th>Years Attended</th>
+						<th>College</th>
+						<th>GPA in China</th>
+					</tr>
+					{% for review in graduate_student_reviews %}
+					<tr>
+						<td>{{review.id}}</td>
+						<td><p class="AgentGraduateStudentReviewClass" id="AgentGraduateStudentReview{{review.id}}" style="color:blue;margin-bottom:0;cursor:pointer;">{{review.student}}</p></td>
+						<td>{{review.attended}}</td>
+						<td>{{review.college}}</td>
+						<td>{{review.gpa_china}}</td>
+					</tr>
+					{% endfor %}
+				</table>
+
+				<!-- <div class="ListCounter">
+					<a href="">◀</a>
+					<a>...</a>
+					<a href="">1</a>
+					<a href="">2</a>
+					<a href="">3</a>
+					<a href="">4</a>
+					<a href="">5</a>
+					<a>...</a>
+					<a href="">128</a>
+					<a href="">▶</a>
+				</div> -->
+
+
+			</div><!-- ListTable -->
+			<!-- 학교리뷰목록 끝 -->
+		</div><!-- BOX02E -->
+		<div class="EndPart"></div>
+
+
+
+	</div>
+</div><!--  ContentsFrame-->
+
+
+{% endblock %}

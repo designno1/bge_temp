@@ -1,0 +1,253 @@
+{% extends 'base.html' %}
+{% load static templatehelpers %}
+{% block content %}
+<div class="ContentsFrame">
+	<div class="MainAFrame">
+		<div class="MTitle">Customer Search</div>
+    <form method="GET">
+  		<div class="InfoTable">
+  			<table cellpadding="0" cellspacing="0" border="0">
+  				<colgroup>
+  					<col width="170">
+  					<col>
+  					<col width="80">
+  					<col>
+  				</colgroup>
+  				<tr>
+  					<th>Name, Phone, E-mail Search :</th>
+  					<td class="InnerInputTD">
+  						<input type="text" class="TableInnerInput" size="36" name="q" value="{{request.GET.q}}"/>
+              {% if request.GET.registered  == 'registered' %}
+  						<label><input type="radio" name="registered" value="registered" checked/><span></span>Registered</label>
+  						<label><input type="radio" name="registered" value="unregistered"/><span></span>No Registered</label>
+              {% elif request.GET.registered == 'unregistered' %}
+              <label><input type="radio" name="registered" value="registered"/><span></span>Registered</label>
+  						<label><input type="radio" name="registered" value="unregistered" checked/><span></span>No Registered</label>
+              {% else %}
+              <label><input type="radio" name="registered" value="registered"/><span></span>Registered</label>
+  						<label><input type="radio" name="registered" value="unregistered"/><span></span>No Registered</label>
+              {% endif %}
+  					</td>
+  					<th>Possibility : </th>
+  					<td>
+              {% if request.GET.possibility == 'a' %}
+              <label><input type="radio" name="possibility" value="a" checked/><span></span>A</label>
+  						<label><input type="radio" name="possibility" value="b"/><span></span>B</label>
+  						<label><input type="radio" name="possibility" value="c"/><span></span>C</label>
+  						<label><input type="radio" name="possibility" value="t"/><span></span>T</label>
+              {% elif request.GET.possibility == 'b' %}
+              <label><input type="radio" name="possibility" value="a"/><span></span>A</label>
+  						<label><input type="radio" name="possibility" value="b" checked/><span></span>B</label>
+  						<label><input type="radio" name="possibility" value="c"/><span></span>C</label>
+  						<label><input type="radio" name="possibility" value="t"/><span></span>T</label>
+              {% elif request.GET.possibility == 'c' %}
+              <label><input type="radio" name="possibility" value="a"/><span></span>A</label>
+  						<label><input type="radio" name="possibility" value="b"/><span></span>B</label>
+  						<label><input type="radio" name="possibility" value="c" checked/><span></span>C</label>
+  						<label><input type="radio" name="possibility" value="t"/><span></span>T</label>
+              {% elif request.GET.possibility == 't' %}
+              <label><input type="radio" name="possibility" value="a"/><span></span>A</label>
+  						<label><input type="radio" name="possibility" value="b"/><span></span>B</label>
+  						<label><input type="radio" name="possibility" value="c"/><span></span>C</label>
+  						<label><input type="radio" name="possibility" value="t" checked/><span></span>T</label>
+              {% else %}
+              <label><input type="radio" name="possibility" value="a"/><span></span>A</label>
+  						<label><input type="radio" name="possibility" value="b"/><span></span>B</label>
+  						<label><input type="radio" name="possibility" value="c"/><span></span>C</label>
+  						<label><input type="radio" name="possibility" value="t"/><span></span>T</label>
+              {% endif %}
+  					</td>
+  				</tr>
+  				<tr>
+  					<th>Expected departure :</th>
+  					<td class="InnerInputTD">
+  						<select class="TableInnerInput" name="departure">
+                {% if request.GET.departure == '7d' %}
+                <option></option>
+                <option value="7d" selected>Within 7days</option>
+                <option value="1m">Within 1month</option>
+  							<option value="3m">Within 3months</option>
+                <option value="6m">Within 6months</option>
+                {% elif request.GET.departure == '1m' %}
+                <option></option>
+                <option value="7d">Within 7days</option>
+                <option value="1m" selected>Within 1month</option>
+  							<option value="3m">Within 3months</option>
+                <option value="6m">Within 6months</option>
+                {% elif request.GET.departure == '3m' %}
+                <option></option>
+                <option value="7d">Within 7days</option>
+                <option value="1m">Within 1month</option>
+  							<option value="3m" selected>Within 3months</option>
+                <option value="6m">Within 6months</option>
+                {% elif request.GET.departure == '6m' %}
+                <option></option>
+                <option value="7d">Within 7days</option>
+                <option value="1m">Within 1month</option>
+  							<option value="3m">Within 3months</option>
+                <option value="6m" selected>Within 6months</option>
+                {% else %}
+                <option></option>
+                <option value="7d">Within 7days</option>
+                <option value="1m">Within 1month</option>
+  							<option value="3m">Within 3months</option>
+                <option value="6m">Within 6months</option>
+                {% endif %}
+  						</select>
+              {% if request.GET.country == 'us' %}
+              <label><input type="radio" name="country" value="us" checked/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca"/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk"/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au"/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz"/><span></span>NZ</label>
+              {% elif request.GET.country == 'ca' %}
+              <label><input type="radio" name="country" value="us"/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca" checked/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk"/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au"/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz"/><span></span>NZ</label>
+              {% elif request.GET.country == 'uk' %}
+              <label><input type="radio" name="country" value="us"/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca"/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk" checked/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au"/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz"/><span></span>NZ</label>
+              {% elif request.GET.country == 'au' %}
+              <label><input type="radio" name="country" value="us"/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca"/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk"/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au" checked/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz"/><span></span>NZ</label>
+              {% elif request.GET.country == 'nz' %}
+              <label><input type="radio" name="country" value="us"/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca"/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk"/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au"/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz" checked/><span></span>NZ</label>
+              {% else %}
+              <label><input type="radio" name="country" value="us"/><span></span>US</label>
+  						<label><input type="radio" name="country" value="ca"/><span></span>CA</label>
+  						<label><input type="radio" name="country" value="uk"/><span></span>UK</label>
+  						<label><input type="radio" name="country" value="au"/><span></span>AU</label>
+  						<label><input type="radio" name="country" value="nz"/><span></span>NZ</label>
+              {% endif %}
+  					</td>
+  					<th>Type : </th>
+  					<td>
+              {% if request.GET.type == 'k12' %}
+              <label><input type="radio" name="type" value="k12" checked/><span></span>K-12</label>
+  						<label><input type="radio" name="type" value="college"/><span></span>College</label>
+  						<label><input type="radio" name="type" value="camp"/><span></span>Camp</label>
+              <label><input type="radio" name="type" value="not_specified"/><span></span>Not Specified</label>
+              {% elif request.GET.type == 'college' %}
+              <label><input type="radio" name="type" value="k12"/><span></span>K-12</label>
+  						<label><input type="radio" name="type" value="college" checked/><span></span>College</label>
+  						<label><input type="radio" name="type" value="camp"/><span></span>Camp</label>
+              <label><input type="radio" name="type" value="not_specified"/><span></span>Not Specified</label>
+              {% elif request.GET.type == 'camp' %}
+              <label><input type="radio" name="type" value="k12"/><span></span>K-12</label>
+  						<label><input type="radio" name="type" value="college"/><span></span>College</label>
+  						<label><input type="radio" name="type" value="camp" checked/><span></span>Camp</label>
+              <label><input type="radio" name="type" value="not_specified"/><span></span>Not Specified</label>
+              {% elif request.GET.type == 'not_specified' %}
+              <label><input type="radio" name="type" value="k12"/><span></span>K-12</label>
+  						<label><input type="radio" name="type" value="college"/><span></span>College</label>
+  						<label><input type="radio" name="type" value="camp"/><span></span>Camp</label>
+              <label><input type="radio" name="type" value="not_specified" checked/><span></span>Not Specified</label>
+              {% else %}
+              <label><input type="radio" name="type" value="k12"/><span></span>K-12</label>
+  						<label><input type="radio" name="type" value="college"/><span></span>College</label>
+  						<label><input type="radio" name="type" value="camp"/><span></span>Camp</label>
+              <label><input type="radio" name="type" value="not_specified"/><span></span>Not Specified</label>
+              {% endif %}
+  					</td>
+  				</tr>
+  			</table>
+  			<button type="submit" class="SchoolButton">Search</button>
+  		</div><!-- InfoTable -->
+    </form>
+		<div class="EndPart"></div>
+
+
+
+		<div class="MTitle">Customer List</div>
+		<div class="cdiv"></div>
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="20">
+					<col>
+					<col>
+					<col>
+					<col>
+					<col width="60">
+					<col>
+					<col>
+					<col>
+					<col>
+					<col width="250">
+					<col width="40">
+					<col width="40">
+					<col width="40">
+					<col>
+				</colgroup>
+				<tr>
+					<th rowspan="2">No.</th>
+					<th rowspan="2">Date</th>
+					<th rowspan="2">Name</th>
+					<th rowspan="2">Status</th>
+					<th rowspan="2">Possibility</th>
+					<th rowspan="2">Expected Departure</th>
+					<th rowspan="2">Program</th>
+					<th rowspan="2">Country</th>
+					<th rowspan="2">Cell Phone</th>
+					<th rowspan="2">We Chat ID</th>
+					<th rowspan="2">Counseling details</th>
+					<th colspan="3" class="row2">Contact history</th>
+					<th rowspan="2">Registration</th>
+				</tr>
+				<tr>
+					<th class="row2">1st</th>
+					<th class="row2">2nd</th>
+					<th class="row2">3rd</th>
+				</tr>
+        {% for i in data %}
+				<tr>
+					<td>{{ i.id }}</td>
+					<td>{{ i.counseling_date.year }}-{{ i.counseling_date.month }}-{{ i.counseling_date.day }}</td>
+					<td><a href="customer/{{i.id}}/register">{{ i.student }}</a></td>
+					<td>{{ i.student.status|capfirst}}</td>
+					<td>{{ i.possibility }}</td>
+					<td>{{ i.expected_departure.year }}-{{ i.expected_departure.month }}-{{ i.expected_departure.day }}</td>
+					<td>{{ i.program_interested|capfirst }}</td>
+					<td>{{ i.desire_country|upper }}</td>
+					<td>{{ i.student.phone }}</td>
+					<td>{{ i.student.wechat }}</td>
+					<td>{{ i.detail }}</td>
+					<td>{{ i.contact_first }}</td>
+					<td>{{ i.contact_second }}</td>
+					<td>{{ i.contact_third }}</td>
+					<td class="InnerInputTD">
+						<a class="Button" href="application/{{ i.id }}/register" target="_BLANK">Register..</a>
+					</td>
+				</tr>
+        {% endfor %}
+			</table>
+		</div><!-- ListTable -->
+    <div class="ListCounter">
+      {% if data.has_other_pages %}
+        {% for i in data.paginator.page_range %}
+          {% if data.number == i %}
+            <span>{{ i }}</span>
+          {% else %}
+            <a href="{% relative_url i 'page' request.GET.urlencode %}">{{ i }}</a>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </div>
+</div>
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="ContentsFrame">
+	<a href="../reg/csregister.php" target="_BLANK"><div class="CIButton">Customer Register</div></a>
+
+
+	<div class="LeftFrame" id="LeftF">
+		<div class="SectionTitle">Agent Profile Update</div>
+		<div class="LeftTab" id="LeftTab01">
+			<div class="TabConternts" id="InnerTab0101">
+				<div class="InnerTabContents">
+					<li><a href="../agent/info.php">Meten</a></li>
+					<li><a href="../agent/info.php">Yangzhou</a></li>
+					<li><a href="../agent/info.php">AsiaUS</a></li>
+					<br />
+					<button class="IsolationButton">+ &nbsp; Add Agent List</button>
+				</div><!-- InnerTabContents -->
+
+			</div><!-- TabConternts ID:InnerTab0101 -->
+		</div><!-- LeftTab ID:LeftTab01 -->
+	</div><!-- LeftFrame -->
+
+
+	<div class="MainFrame" id="MainF">
+		<div id="CollegeTab">
+
+
+		<div class="MTitle">Agent Overview</div>
+		<div class="cdiv"></div>
+		<div class="AgentFrameL">
+			<div class="ListTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+					</colgroup>
+					<tr>
+						<th rowspan="2">Agent</th>
+						<th colspan="2" class="row2">New Students</th>
+					</tr>
+					<tr>
+						<th class="row2">Inquired</th>
+						<th class="row2">Enrolled</th>
+					</tr>
+					<tr>
+						<td><a href="../agent/info.php">Meten</a></td>
+						<td>-</td>
+						<td>10</td>
+					</tr>
+					<tr>
+						<td><a href="../agent/info.php">Yangzhou</a></td>
+						<td>-</td>
+						<td>3</td>
+					</tr>
+					<tr>
+						<td><a href="../agent/info.php">AsiaUS</a></td>
+						<td>-</td>
+						<td>0</td>
+					</tr>
+					<tr>
+						<td><a href="../agent/info.php">Other(BGE Staff)</a></td>
+						<td>-</td>
+						<td>1</td>
+					</tr>
+					<tr>
+						<td class="TitleColor">Total</td>
+						<td class="TitleColor">-</td>
+						<td class="TitleColor">14</td>
+					</tr>
+				</table>
+			</div><!-- ListTable -->
+		</div><!-- AgentFrameL -->
+
+		<div class="AgentFrameR">
+			<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+			<script type="text/javascript">
+			  google.charts.load('current', {'packages':['line']});
+			  google.charts.setOnLoadCallback(drawChart);
+
+			function drawChart() {
+
+			  var data = new google.visualization.DataTable();
+			  data.addColumn('number', 'year');
+			  data.addColumn('number', 'Meten');
+			  data.addColumn('number', 'Yangzhou');
+			  data.addColumn('number', 'AsiaUS');
+			  data.addColumn('number', 'Other(BGE Staff)');
+
+			  data.addRows([
+				[2018,  37.8, 80.8, 41.8, 10],
+				[2019,  30.9, 69.5, 32.4, 10],
+				[2020,  25.4,   57, 25.7, 10],
+				[2021,  11.7, 18.8, 10.5, 10],
+				[2022,  11.9, 17.6, 10.4, 10],
+			  ]);
+
+			  var options = {
+
+//				chart: {
+//				  title: 'Box Office Earnings in First Two Weeks of Opening',
+//				  subtitle: 'in millions of dollars (USD)'
+//				},
+				width: 600,
+				height: 190,
+				axes: {
+				  x: {
+					0: {side: 'bottom'}
+				  }
+				}
+			  };
+
+			  var chart = new google.charts.Line(document.getElementById('line_top_x'));
+
+			  chart.draw(data, google.charts.Line.convertOptions(options));
+			}
+		  </script>
+			<div id="line_top_x"></div>
+		</div><!-- AgentFrameR -->
+		<div class="cdiv"></div>
+		<div class="EndPart"></div>
+
+
+
+		<div class="MTitle">Agent Communication Log</div>
+		<div class="ListSearch Aright">
+			<div>
+
+
+			<select class="SearchSelect">
+				<option>Agent Presets</option>
+				<option>Meten</option>
+				<option>BGE-Yanzhou</option>
+				<option>AaisUS</option>
+				<option>Other(BGE Staff)</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+			From :
+			<select class="SearchSelect">
+				<option>December</option>
+				<option>November</option>
+				<option>October</option>
+				<option>September</option>
+				<option>August</option>
+				<option>July</option>
+				<option>June</option>
+				<option>May</option>
+				<option>April</option>
+				<option>March</>
+				<option>February</option>
+				<option>January</option>
+			</select>
+			&nbsp;&nbsp;
+			To :
+			<select class="SearchSelect">
+				<option>December</option>
+				<option>November</option>
+				<option>October</option>
+				<option>September</option>
+				<option>August</option>
+				<option>July</option>
+				<option>June</option>
+				<option>May</option>
+				<option>April</option>
+				<option>March</>
+				<option>February</option>
+				<option>January</option>
+			</select>
+			</div>
+		</div>
+
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="180">
+					<col>
+				</colgroup>
+				<tr>
+					<th>Agent</th>
+					<th>Date</th>
+					<th>Contact Person</th>
+					<th>Category</th>
+					<th>Comment</th>
+					<th>Priority (1-5)</th>
+					<th>Writer</th>
+				</tr>
+				<tr>
+					<td>Meten</td>
+					<td>-</td>
+					<td>데이비드 강</td>
+					<td>1~6</td>
+					<td>Procedure at the first counseling..</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>BGE-Yanzhou</td>
+					<td>-</td>
+					<td>데이비드 강</td>
+					<td>1~6</td>
+					<td>Procedure at the first counseling..</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>AaisUS</td>
+					<td>-</td>
+					<td>데이비드 강</td>
+					<td>1~6</td>
+					<td>Procedure at the first counseling..</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>Other(BGE Staff)</td>
+					<td>-</td>
+					<td>데이비드 강</td>
+					<td>1~6</td>
+					<td>Procedure at the first counseling..</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+			</table>
+		</div><!-- ListTable -->
+
+
+
+
+
+
+
+
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+<script>
+function MenuOpen() {
+	obj = document.getElementById('LeftF');
+
+	if (obj.style.margin == "0px 0px 0px -229px") {
+		document.getElementById('LeftF').style.margin='0px 0px 0px 0px';
+		document.getElementById('MToggle').style.transform='rotate(90deg)';
+		document.getElementById('MainF').style.width='calc(100% - 355px)';
+	} else {
+		document.getElementById('LeftF').style.margin='0px 0px 0px -229px';
+		document.getElementById('MToggle').style.transform='rotate(0deg)';
+		document.getElementById('MainF').style.width='calc(100% - 126px)';
+	}
+}
+</script>
+{% endblock %}

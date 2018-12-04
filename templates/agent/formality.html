@@ -1,0 +1,496 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="ContentsFrame">
+
+
+	<div class="LeftFrame" id="LeftF">
+		<div class="SectionTitle">Application Process</div>
+		<div class="LeftTab" id="LeftTab01">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');" class="On">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+          {% for progress in in_progress %}
+					<li><a href="/agent/process/{{progress.id}}">{{progress.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab01 -->
+
+
+
+
+		<div class="LeftTab" id="LeftTab02">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');" class="On">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+					{% for completed in process_completed %}
+					<li><a href="/agent/process/{{completed.id}}">{{completed.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab02 -->
+
+
+
+
+		<div class="LeftTab" id="LeftTab03">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');" class="On">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+					{% for canceled in process_canceled %}
+					<li><a href="/agent/process/{{canceled.id}}">{{canceled.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab03 -->
+
+
+
+	</div><!-- LeftFrame -->
+
+	<style>
+	#LeftTab02, #LeftTab03 {display:none;}
+	</style>
+
+
+
+	<script>
+	function TabOpen(TabName) {
+	document.getElementById('LeftTab01').style.display='none';
+	document.getElementById('LeftTab02').style.display='none';
+	document.getElementById('LeftTab03').style.display='none';
+
+	document.getElementById(TabName).style.display='block';
+	}
+	</script>
+
+
+
+
+	<div class="MainFrame" id="MainF">
+		<div class="MTitle">Student Information</div>
+		<div class="cdiv"></div>
+		<div class="InformationSet">
+      {% if user.image %}
+        <div class="Picture" style="background-image:url('/media/{{ user.image }}');">&nbsp;</div>
+      {% else %}
+        <div class="Picture" style="background-image:url('{% static 'img/no_user.png' %}');">&nbsp;</div>
+      {% endif %}
+			<div class="Information">
+				<div class="InfoTable">
+					<table cellpadding="0" cellspacing="0" border="0">
+						<colgroup>
+							<col width="14%">
+							<col width="36%">
+							<col width="14%">
+							<col width="36%">
+						</colgroup>
+						<tr>
+							<th>Name : </th>
+							<td>{{ student_info.name }}</td>
+							<th>Enrollment date : </th>
+							<td>{{ found_formality.created_at|date:"Y-m-d" }}</td>
+						</tr>
+						<tr>
+							<th>DOB : </th>
+							<td>{{ student_info.birthday|date:"Y-m-d" }}</td>
+							<th>Mobile : </th>
+							<td>{{ student_info.phone}}</td>
+						</tr>
+						<tr>
+							<th>School : </th>
+							<td>{{ student_history.current_school }}</td>
+							<th>Email : </th>
+							<td>{{ student_info.email }}</td>
+						</tr>
+						<tr>
+							<th>Year : </th>
+							<td>{{ student_history.current_grade }}</td>
+							<th>Skype ID : </th>
+							<td>{{ student_info.skype }}</td>
+						</tr>
+						<tr>
+							<th>Nationality : </th>
+							<td>{{ student_info.nationality }}</td>
+							<th>Wechat ID : </th>
+							<td>{{ student_info.wechat }}</td>
+						</tr>
+					</table>
+				</div><!-- InfoTable -->
+			</div><!-- Information -->
+
+
+
+			<div class="HButton" OnClick="document.getElementById('PopFileBox').style.display='block';">File Box</div>
+			<div class="Information">
+				<div class="InfoTable">
+					<table cellpadding="0" cellspacing="0" border="0">
+						<tr>
+							<td>
+								{% if found_formality.payment_complete %}
+								<label id="Registration">
+                  <input type="checkbox" disabled checked /><span></span>Registration
+                </label>
+								<span class="DoneIcon">E</span>
+								<span class="AddComment">
+									{{ found_formality.apply_at|date:"Y-m-d" }}/ {{found_formality.school_formality_count}} Schools, processing fee ${{found_formality.payment_complete_fee}} payment completed
+								</span>
+								{% else %}
+								<label id="Registration">
+                  <input type="checkbox" disabled /><span></span>Registration
+                </label>
+								{% endif %}
+							</td>
+							<td>
+								<label id="CancelRegistration">
+									{% if found_formality.canceled_at %}
+                  <input type="checkbox" disabled checked/><span></span>Cancel Registration
+									{% else %}
+									<input type="checkbox" disabled /><span></span>Cancel Registration
+									{% endif %}
+                </label>
+								{% if found_formality.canceled_at %}
+								<span class="DoneIcon">E</span>
+								<span class="AddComment">
+									{{ found_formality.canceled_at|date:"Y-m-d" }}
+								</span>
+								{% endif %}
+							</td>
+						</tr>
+					</table>
+				</div><!-- InfoTable -->
+			</div><!-- Information -->
+		</div><!-- InformationSet -->
+		<div class="EndPart"></div>
+
+
+
+		<div class="MTitle" style="width:100%;">
+			Application information
+    </div>
+		<div class="InfoTable">
+      {% for school in school_formalities %}
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="50%">
+				</colgroup>
+				<tr>
+					<td class="TitleColor" colspan="2">{{ school.school.name }}</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label id="EnrolmentLabel{{school.id}}" class="EnrolmentLabelClass">
+							{% if school.enrolment_apply_done %}
+							<input type="checkbox" disabled checked/><span></span>
+							{% else %}
+              <input type="checkbox" disabled /><span></span>
+							{% endif %}
+              Enrolment Application
+            </label>
+						{% if school.enrolment_apply_done %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{school.enrolment_apply_done_date|date:"Y-m-d"}} / Application fee ${{school.enrolment_apply_fee}} payment completed</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label id="SchoolInterviewLabel{{school.id}}" class="SchoolInterviewLabelClass">
+							{% if school.school_interview_date or school.school_interview_time %}
+              <input type="checkbox" disabled checked/><span></span>School interview scheduling
+							{% else %}
+							<input type="checkbox" disabled /><span></span>School interview scheduling
+							{% endif %}
+            </label>
+						{% if school.school_interview_date or school.school_interview_time %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">{{school.school_interview_date|date:"Y-m-d"}} / {{school.school_interview_time}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="AcceptanceLabel{{school.id}}" class="AcceptanceLabelClass">
+							{% if school.acceptance_date or school.acceptance_letter %}
+              <input type="checkbox" disabled checked/><span></span>Accepted
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Accepted
+							{% endif %}
+            </label>
+						{% if school.acceptance_date %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">{{school.acceptance_date|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+					<td>
+						<label id="CancelEnrolmentLabel{{school.id}}" class="CancelEnrolmentLabelClass">
+							{% if school.cancel_enrolment_date or school.cancel_enrolment_time %}
+              <input type="checkbox" disabled checked/><span></span>Cancel enrolment
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Cancel enrolment
+							{% endif %}
+            </label>
+						{% if school.cancel_enrolment_date or school.cancel_enrolment_time %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">{{school.cancel_enrolment_date|date:"Y-m-d"}} / {{school.cancel_enrolment_time}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label id="I20RequestLabel{{school.id}}" class="I20RequestLabelClass">
+							{% if school.i20_completed %}
+							<input type="checkbox" disabled checked/><span></span>I-20 request
+							{% else %}
+              <input type="checkbox" disabled /><span></span>I-20 request
+							{% endif %}
+            </label>
+						{% if school.i20_completed %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">I20 fee ${{school.i20_fee}} payment completed</span>
+						{% endif %}
+					</td>
+					<td>
+						<label id="I20ReceivedLabel{{school.id}}" class="I20ReceivedLabelClass">
+							{% if school.i20_received_date %}
+              <input type="checkbox" disabled checked/><span></span>I-20 received
+							{% else %}
+							<input type="checkbox" disabled /><span></span>I-20 received
+							{% endif %}
+            </label>
+						{% if school.i20_received_date %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">I20 received date {{school.i20_received_date|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<label id="ProgramFeePaymentLabel{{school.id}}" class="ProgramFeePaymentLabelClass">
+							{% if school.program_fee_completed %}
+              <input type="checkbox" disabled checked/><span></span>Program fee payment
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Program fee payment
+							{% endif %}
+            </label>
+						{% if school.program_fee_completed %}
+							<span class="DoneIcon">E</span>
+							<span class="AddComment">Program fee ${{school.program_fee}} - I20 Deposit ${{school.i20_fee}} : Amount ${{school.payment_amount}}</span>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+      {% endfor %}
+
+		</div><!-- InfoTable -->
+		<div class="EndPart"></div>
+
+		<div class="MTitle">Visa</div>
+		<div class="InfoTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="50%">
+				</colgroup>
+				<tr>
+					<td colspan="2">
+						<label class="VisaInterviewSchedulingLabelClass">
+							{% if found_formality.visa_reserve_date or found_formality.visa_reserve_time %}
+							<input type="checkbox" disabled checked /><span></span>Visa interview scheduling
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Visa interview scheduling
+							{% endif %}
+						</label>
+							{% if found_formality.visa_reserve_date or found_formality.visa_reserve_time %}
+								<span class="DoneIcon">E</span><span class="AddComment">{{ found_formality.visa_reserve_date|date:"Y-m-d"}} / {{ found_formality.visa_reserve_time}}</span>
+							{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="VisaGrantedLabelClass">
+							{% if found_formality.visa_granted_date or visa_granted_time %}
+							<input type="checkbox" disabled checked /><span></span>Visa granted
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Visa granted
+							{% endif %}
+						</label>
+						{% if found_formality.visa_granted_date or found_formality.visa_granted_time %}
+							<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.visa_granted_date|date:"Y-m-d"}} / {{found_formality.visa_granted_time}}</span>
+						{% endif %}
+					</td>
+					<td>
+						<label class="VisaRejectedLabelClass">
+							{% if found_formality.visa_rejected_date or found_formality.visa_rejected_time %}
+							<input type="checkbox" disabled checked/><span></span>Visa Rejected
+							{% else %}
+							<input type="checkbox" disabled/><span></span>Visa Rejected
+							{% endif %}
+						</label>
+						{% if found_formality.visa_rejected_date or found_formality.visa_rejected_time %}
+							<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.visa_rejected_date|date:"Y-m-d"}} / {{found_formality.visa_rejected_time}}</span>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div><!-- InfoTable -->
+		<div class="EndPart"></div>
+
+		<div class="MTitle">Flight / Airport pick-up</div>
+		<div class="InfoTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<tr>
+					<td>
+						<label class="FlightTicketingLabelClass">
+							{% if found_formality.air_departure_date or found_formality.air_arrive_date %}
+							<input type="checkbox" disabled checked /><span></span>Flight ticketing
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Flight ticketing
+							{% endif %}
+						</label>
+						{% if found_formality.air_departure_date or found_formality.air_arrive_date %}
+						<span class="DoneIcon">E</span><span class="AddComment">Dep. {{found_formality.air_departure_date|date:"Y-m-d"}} / {{found_formality.air_departure_time}} ({{found_formality.air_departure_port}})  |
+							  Arr. {{found_formality.air_arrive_date|date:"Y-m-d"}} / {{found_formality.air_arrive_time}} ({{found_formality.air_arrive_port}})</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="AirportPickUpLabelClass">
+							{% if found_formality.pickup_num %}
+							<input type="checkbox" disabled checked /><span></span>Airport Pick-up application
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Airport Pick-up application
+							{% endif %}
+						</label>
+						{% if found_formality.air_arrive_date or found_formality.air_arrive_time %}
+							{% if found_formality.pickup_num %}
+							<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.air_arrive_date|date:"Y-m-d"}} / {{found_formality.air_arrive_time}} ({{found_formality.air_arrive_port}}) | Member : {{found_formality.pickup_num}}</span>
+							{% else %}
+							<span class="NotDoneIcon">N</span><span class="AddComment2">{{found_formality.air_arrive_date|date:"Y-m-d"}} / {{found_formality.air_arrive_time}} ({{found_formality.air_arrive_port}})</span>
+							{% endif %}
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div><!-- InfoTable -->
+		<div class="EndPart"></div>
+
+		<div class="MTitle">Accommodation</div>
+		<div class="InfoTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="50%">
+				</colgroup>
+				<tr>
+					<td>
+						<label class="AccommodationApplicationLabelClass">
+							{% if found_formality.accommodation.application_at %}
+							<input type="checkbox" disabled checked /><span></span>Application
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Application
+							{% endif %}
+						</label>
+						{% if found_formality.accommodation.application_at %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{ found_formality.accommodation.application_at|date:"Y-m-d" }}</span>
+						{% endif %}
+					</td>
+					<td>
+						<label class="HomeStayRecommendationLabelClass">
+							{% if found_formality.accommodation.homestay_recommendation_at %}
+							<input type="checkbox" disabled checked /><span></span>Home stay recommendation
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Home stay recommendation
+							{% endif %}
+						</label>
+						{% if found_formality.accommodation.homestay_recommendation_at %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.accommodation.homestay_recommendation_at|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label class="HostSelectionLabelClass">
+							{% if found_formality.accommodation.host_selection_at %}
+							<input type="checkbox" disabled checked /><span></span>Host selection
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Host selection
+							{% endif %}
+						</label>
+						{% if found_formality.accommodation.host_selection_at %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.accommodation.host_selection_at|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+					<td>
+						<label class="ParentsAccommodationLabelClass">
+							{% if found_formality.accommodation.parent_accommodation_at %}
+							<input type="checkbox" disabled checked /><span></span>Parents accommodation
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Parents accommodation
+							{% endif %}
+						</label>
+						{% if found_formality.accommodation.parent_accommodation_at %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.accommodation.parent_accommodation_at|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div><!-- InfoTable -->
+		<div class="EndPart"></div>
+
+
+
+		<div class="MTitle">Departure</div>
+		<div class="InfoTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col width="50%">
+				</colgroup>
+				<tr>
+					<td>
+						<label class="DepartureOTLabelClass">
+							{% if found_formality.departure_ot %}
+							<input type="checkbox" disabled checked /><span></span>Pre-departure Orientation
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Pre-departure Orientation
+							{% endif %}
+						</label>
+						{% if found_formality.departure_ot %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.departure_ot|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+					<td>
+						<label class="DepartureConfirmedLabelClass">
+							{% if found_formality.departure_confirmed%}
+							<input type="checkbox" disabled checked /><span></span>Departure confirmed
+							{% else %}
+							<input type="checkbox" disabled /><span></span>Departure confirmed
+							{% endif %}
+						</label>
+						{% if found_formality.departure_confirmed %}
+						<span class="DoneIcon">E</span><span class="AddComment">{{found_formality.departure_confirmed|date:"Y-m-d"}}</span>
+						{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div><!-- InfoTable -->
+		<div class="EndPart"></div>
+
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+
+{% include "subpages/_pop.html" %}
+
+{% endblock %}

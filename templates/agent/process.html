@@ -1,0 +1,198 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="ContentsFrame">
+	<div class="LeftFrame" id="LeftF">
+		<div class="SectionTitle">Application Process</div>
+		<div class="LeftTab" id="LeftTab01">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');" class="On">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+					{% for progress in in_progress %}
+					<li><a href="/agent/process/{{progress.id}}">{{progress.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab01 -->
+
+
+
+
+		<div class="LeftTab" id="LeftTab02">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');" class="On">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+					{% for completed in process_completed %}
+					<li><a href="/agent/process/{{completed.id}}">{{completed.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab02 -->
+
+
+
+
+		<div class="LeftTab" id="LeftTab03">
+			<div class="TabTitle">
+				<div OnClick="TabOpen('LeftTab01');">In- progress</div>
+				<div OnClick="TabOpen('LeftTab02');">Completed</div>
+				<div OnClick="TabOpen('LeftTab03');" class="On">Canceled</div>
+			</div><!-- TabTitle -->
+			<div class="TabConternts">
+				<div class="InnerTabContents">
+					{% for canceled in process_canceled %}
+					<li><a href="/agent/process/{{canceled.id}}">{{canceled.counsel.student.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div>
+		</div><!-- LeftTab ID:LeftTab03 -->
+
+
+
+	</div><!-- LeftFrame -->
+
+	<style>
+	#LeftTab02, #LeftTab03 {display:none;}
+	</style>
+
+
+
+	<script>
+	function TabOpen(TabName) {
+	document.getElementById('LeftTab01').style.display='none';
+	document.getElementById('LeftTab02').style.display='none';
+	document.getElementById('LeftTab03').style.display='none';
+
+	document.getElementById(TabName).style.display='block';
+	}
+	</script>
+
+
+
+
+	<div class="MainFrame" id="MainF">
+
+		<div class="BOX03">
+			<div class="MTitle">Application not completed</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for formality in application_not_completed %}
+					<tr>
+						<td><a href="process/{{formality.id}}">{{formality.counsel.student.name}}</a></td>
+						<th>{{formality.created_at|date:"Y-m-d"}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Application not completed -->
+
+		<div class="BOX03">
+			<div class="MTitle">Upcoming School-interview</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for school_formality in upcoming_school_interview %}
+						<tr>
+							<td><a href="process/{{school_formality.formality.id}}">{{school_formality.formality.counsel.student.name}}</a></td>
+							<th>{{school_formality.school_interview_date|date:"Y-m-d"}}</th>
+						</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Upcoming School-interview -->
+
+		<div class="BOX03E">
+			<div class="MTitle">Pending admission decision</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for formality in pending_admission_decision %}
+					<tr>
+						<td><a href="process/{{formality.id}}">{{formality.counsel.student.name}}</a></td>
+						<th>{{formality.created_at|date:"Y-m-d"}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Pending admission decision -->
+		<div class="cdiv"></div>
+		<div class="EndPart"></div>
+
+		<div class="BOX03">
+			<div class="MTitle">Pending to issue I-20</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for formality in pending_issue_i20 %}
+					<tr>
+						<td><a href="process/{{formality.id}}">{{formality.counsel.student.name}}</a></td>
+						<th>{{formality.created_at|date:"Y-m-d"}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Pending to issue I-20 -->
+
+		<div class="BOX03">
+			<div class="MTitle">Upcoming Visa-interview</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for formality in upcoming_visa_interview %}
+					<tr>
+						<td><a href="process/{{formality.id}}">{{formality.counsel.student.name}}</a></td>
+						<th>{{formality.visa_reserve_date|date:"Y-m-d"}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Upcoming Visa-interview -->
+
+		<div class="BOX03E">
+			<div class="MTitle">Departure schedule</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col>
+						<col width="76">
+					</colgroup>
+					{% for formality in departure_schedule %}
+					<tr>
+						<td><a href="process/{{formality.id}}">{{formality.counsel.student.name}}</a></td>
+						<th>{{formality.air_departure_date|date:"Y-m-d"}}</th>
+					</tr>
+					{% endfor %}
+				</table>
+			</div><!-- InfoTable -->
+		</div><!-- BOX03:Departure schedule -->
+		<div class="cdiv"></div>
+		<div class="EndPart"></div>
+
+
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+{% endblock %}

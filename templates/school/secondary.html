@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="ContentsFrame">
+	<div class="LeftFrame" id="LeftF">
+		<div class="SectionTitle">Secondary Schools</div>
+		<div class="LeftTab" id="LeftTab01">
+			<div class="TabConternts" id="InnerTab0101">
+				<div class="InnerTabContents">
+					{% for school in all_schools %}
+					<li><a href="/school/secondary/update/{{school.id}}">{{school.name}}</a></li>
+					{% endfor %}
+				</div><!-- InnerTabContents -->
+			</div><!-- TabConternts ID:InnerTab0101 -->
+		</div><!-- LeftTab ID:LeftTab01 -->
+		<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/school/secondary/create" class="IsolationButton">+ &nbsp; Add New School</a>
+	</div><!-- LeftFrame -->
+
+	<div class="MainFrame" id="MainF">
+
+		<div class="MTitle">Search Result</div>
+			<div class="ListSearch Aright">
+				<div>
+				<form method="GET">
+				Search by School Name :
+	        <input id="school_textbox" type="text" class="SearchInput" style="width:300px;" name="search_name"/>
+					<select class="SearchSelect" id="school_name" name="search_id">
+						<option>Select School..</option>
+						{% for school in all_schools %}
+						<option value="{{school.id}}">{{school.name}}</option>
+						{% endfor %}
+					</select>
+					<button type="submit" class="ListSearchButton">Search</button>
+				</form>
+				</div>
+			</div>
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col>
+				</colgroup>
+				<tr>
+					<th>School Name</th>
+					<th>Partner Status</th>
+					<th>(Recent) Log Date</th>
+					<th>(Recent) Comment</th>
+					<th>Student</th>
+				</tr>
+				{% for school in search_schools %}
+				<tr>
+					<td class="Relationship"><a href="/school/secondary/update/{{school.id}}">{{school.name}}</a></td>
+					<td class="Relationship">{{school.partnership}}</td>
+					<td class="Relationship">2018.02.14</td>
+					<td class="Relationship Aleft">PTO Fundraising</td>
+					<td class="Relationship Aleft">
+					<a class="Button">David Kang</a>
+					<a class="Button">Michael Joe</a>
+					<a class="Button">Susan Lin</a>
+					<a class="Button">Jason Kim</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+		</div><!-- ListTable -->
+
+
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+
+{% endblock %}
