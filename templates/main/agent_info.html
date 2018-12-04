@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Script-Type" content="text/javascript">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<?php include('../inc/_header.php'); ?>
+</head>
+<body>
+<?php include('../inc/_pop.php'); ?>
+<?php include('../inc/_top.php'); ?>
+
+<div class="ContentsFrame">	
+
+	
+	<div class="LeftFrame" id="LeftF">
+		<div class="SectionTitle">Agent Profile Update</div>
+		<div class="LeftTab" id="LeftTab01">
+			<div class="TabConternts" id="InnerTab0101">
+				<div class="InnerTabContents">
+					<li><a href="../agent/info.php">Meten</a></li>
+					<li><a href="../agent/info.php">Yangzhou</a></li>
+					<li><a href="../agent/info.php">AsiaUS</a></li>
+				</div><!-- InnerTabContents -->
+			
+			</div><!-- TabConternts ID:InnerTab0101 -->
+		</div><!-- LeftTab ID:LeftTab01 -->
+		<br />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../agent/info.php" class="IsolationButton">+ &nbsp; Add Agent List</a>
+	</div><!-- LeftFrame -->
+
+
+
+	
+	
+	<div class="MainAFrame">
+		<div class="PTitle">Meten <span>Shenzhen, China</span></div>
+
+		
+
+		<form>
+		<input name="type" value="agent_information" hidden/>
+		{% csrf_token %}
+			<div class="MTitle">Agent Information</div>
+			<div class="InfoTable">
+				<table cellpadding="0" cellspacing="0" border="0">
+					<colgroup>
+						<col width="160">
+						<col>
+						<col width="160">
+						<col>
+					</colgroup>
+					<tr>
+						<th>Location : </th>
+						<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="location" value="" /></td>
+						<th>Branches : </th>
+						<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="3"name="number_branch"  value="" />branches</td>
+					</tr>
+					<tr>
+						<th>Program : </th>
+						<td colspan="3">
+							<label><input type="checkbox" name="program" value="secondary" /><span></span>Secondary</label>
+							<label><input type="checkbox" name="program" value="college" /><span></span>College</label>
+							<label><input type="checkbox" name="program" value="camp" /><span></span>Camp</label>
+						</td>	 		
+					</tr>
+					<tr>
+						<th>Capacity (#of Students)  : </th>
+						<td class="InnerInputTD" colspan="3"><input type="text" class="TableInnerInput" style="width:calc(100% - 10px);" name="capacity_students" value="last year 100 students for Secondary students in US" /></td>
+					</tr>
+					<tr>
+						<th>Commission  : </th>
+						<td class="InnerInputTD" colspan="3"><input type="text" class="TableInnerInput" style="width:calc(100% - 10px);" name="commission" value="" /></td>
+					</tr>
+					<tr>
+						<th>Promotion  : </th>
+						<td class="InnerInputTD" colspan="3"><input type="text" class="TableInnerInput" style="width:calc(100% - 10px);" name="promotion" value="" /></td>
+					</tr>
+					<tr>
+						<th>Others  : </th>
+						<td class="InnerInputTD" colspan="3"><input type="text" class="TableInnerInput" style="width:calc(100% - 10px);" name="others" value="" /></td>
+					</tr>
+					<tr>
+						<th>Comment  : </th>
+						<td class="InnerInputTD" colspan="3"><textarea class="TableInnerTextarea" style="height:80px" name="comment"></textarea></td>
+					</tr>
+				</table>
+			</div><!-- InfoTable -->
+			<div class="SubmitButtonLine">
+				<div class="Submit">SAVE</div>		
+			</div>
+		</form>
+		<div class="EndPart"></div>
+
+		
+		
+
+
+
+		<form>
+		{% csrf_token %}
+			<div class="MTitle">Meten Contact Information</div>
+			<div class="cdiv"></div>
+			<div class="InformationSet">
+				<div class="Picture" style="background-image:url('../imgsrc/person01.jpg');">&nbsp;</div>
+				<div class="Information">
+					<div class="InfoTable">
+						<table cellpadding="0" cellspacing="0" border="0">
+							<colgroup>
+								<col width="15%">
+								<col width="35%">
+								<col width="15%">
+								<col width="35%">
+							</colgroup>
+							<tr>
+								<th>Name : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="name" value="" /></td>
+								<th>Contracted Date : </th>
+								<td>25 Aug 2017</td>
+							</tr>
+							<tr>
+								<th>Mobile # : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="18" name="phone" value="" /></td>
+								<th>Email  : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="email" value="" /></td>	 		
+							</tr>
+							<tr>
+								<th>Skype ID : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="skype" value="" /></td>	 
+								<th>Location : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="location" value="" /></td>	 
+							</tr>
+							<tr>
+								<th>Wechat ID : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="wechat" value="" /></td>	 
+								<th>Level : </th>
+								<td>
+									<label><input type="radio" name="level" value="S" /><span></span>S</label>
+									<label><input type="radio" name="level" value="A" /><span></span>A</label>
+									<label><input type="radio" name="level" value="B" /><span></span>B</label>
+									<label><input type="radio" name="level" value="C" /><span></span>C</label>
+									<label><input type="radio" name="level" value="D" /><span></span>D</label>
+								</td>
+							</tr>
+						</table>
+					</div><!-- InfoTable -->
+				</div><!-- Information -->
+				
+				<div class="HButton" OnClick="document.getElementById('PopFileBox').style.display='block';">Change Image..</div>
+				<div class="Information">
+					<a class="IsolationButton">- &nbsp; Delete this Contact Infomation</a>
+				</div><!-- Information -->
+			</div><!-- InformationSet -->
+
+		
+			<div class="InformationSet">
+				<div class="Picture" style="background-image:url('../imgsrc/person01.jpg');">&nbsp;</div>
+				<div class="Information">
+					<div class="InfoTable">
+						<table cellpadding="0" cellspacing="0" border="0">
+							<colgroup>
+								<col width="15%">
+								<col width="35%">
+								<col width="15%">
+								<col width="35%">
+							</colgroup>
+							<tr>
+								<th>Name : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="name" value="" /></td>
+								<th>Contracted Date : </th>
+								<td>25 Aug 2017</td>
+							</tr>
+							<tr>
+								<th>Mobile # : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="18" name="phone" value="" /></td>
+								<th>Email  : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="email" value="" /></td>	 		
+							</tr>
+							<tr>
+								<th>Skype ID : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="skype" value="" /></td>	 
+								<th>Location : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="location" value="" /></td>	 
+							</tr>
+							<tr>
+								<th>Wechat ID : </th>
+								<td class="InnerInputTD"><input type="text" class="TableInnerInput" size="32" name="wechat" value="" /></td>	 
+								<th>Level : </th>
+								<td>
+									<label><input type="radio" name="level" value="S" /><span></span>S</label>
+									<label><input type="radio" name="level" value="A" /><span></span>A</label>
+									<label><input type="radio" name="level" value="B" /><span></span>B</label>
+									<label><input type="radio" name="level" value="C" /><span></span>C</label>
+									<label><input type="radio" name="level" value="D" /><span></span>D</label>
+								</td>
+							</tr>
+						</table>
+					</div><!-- InfoTable -->
+				</div><!-- Information -->
+				
+				
+				<div class="HButton" OnClick="document.getElementById('PopFileBox').style.display='block';">Change Image..</div>
+				<div class="Information">
+					<a class="IsolationButton">+ &nbsp; add Contact Infomation</a> <a class="IsolationButton">- &nbsp; Delete this Contact Infomation</a>
+				</div><!-- Information -->
+			</div><!-- InformationSet -->
+
+
+			<div class="SubmitButtonLine">
+				<div class="Submit">SAVE</div>		
+			</div>
+		</form>
+		<div class="EndPart"></div>
+		<div class="EndPart"></div>
+
+		
+		
+		<div class="MTitle">Relationship history</div>
+		<div class="ListSearch Aright">
+			<div><a href="javascript:void(0);" class="IsolationButton" OnClick="document.getElementById('PopRelationshipHistory').style.display='block';">+ &nbsp; Add New Log</a></div>
+		</div>
+		<div class="cdiv"></div>
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col>
+					<col>
+					<col>
+					<col>
+					<col width="600">
+					<col>
+					<col>
+				</colgroup>
+				<tr>
+					<th>Date</th>
+					<th>Contact Person</th>
+					<th>Location</th>
+					<th>Category</th>
+					<th>Comment</th>
+					<th>Priority (1-5)</th>
+					<th>Writer</th>
+				</tr>
+				<tr>
+					<td>03.27.2018</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>03.27.2018</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>03.27.2018</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>03.27.2018</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>03.27.2018</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+			</table>
+		</div><!-- ListTable -->
+		<div class="EndPart"></div>
+
+		
+		
+		<div class="MTitle">Secondary Program</div>
+		<div class="ListSearch Aright">
+			<div><a href="javascript:void(0);" class="IsolationButton" OnClick="document.getElementById('PopRelationshipHistory').style.display='block';">Update Data</a></div>
+		</div>
+		<div class="cdiv"></div>
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col>
+				</colgroup>
+				<tr>
+					<th>Period</th>
+					<th>Target</th>
+					<th>New Students in Fall</th>
+					<th>New Students in Spring</th>
+					<th>Total New Students in BGE</th>
+					<th>Total Students in BGE</th>
+					<th>Terminating Students (No Graduation)</th>
+					<th>Comments</th>
+				</tr>
+				<tr>
+					<td>2013 ~ 2014</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>
+					<td>15</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2014 ~ 2015</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>
+					<td>15</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2015 ~ 2016</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>
+					<td>15</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2016 ~ 2017</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>
+					<td>15</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2017 ~ 2018</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>
+					<td>15</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+			</table>
+		</div><!-- ListTable -->
+		<div class="EndPart"></div>
+
+		
+		
+		<div class="MTitle">Camp</div>
+		<div class="ListSearch Aright">
+			<div><a href="javascript:void(0);" class="IsolationButton" OnClick="document.getElementById('PopRelationshipHistory').style.display='block';">Update Data</a></div>
+		</div>
+		<div class="cdiv"></div>
+		<div class="ListTable">
+			<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col>
+				</colgroup>
+				<tr>
+					<th>Period</th>
+					<th>Target</th>
+					<th>Summer Camp</th>
+					<th>Winter Camp</th>
+					<th>Comments</th>
+				</tr>
+				<tr>
+					<td>2013 ~ 2014</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2014 ~ 2015</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2015 ~ 2016</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2016 ~ 2017</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2017 ~ 2018</td>
+					<td>10</td>
+					<td>5</td>
+					<td>3</td>
+					<td>-</td>		
+				</tr>
+			</table>
+		</div><!-- ListTable -->
+		<div class="EndPart"></div>
+
+		
+		
+		<div class="MTitle">College Application and others</div>
+		<div class="ListSearch Aright">
+			<div><a href="javascript:void(0);" class="IsolationButton" OnClick="document.getElementById('PopRelationshipHistory').style.display='block';">Update Data</a></div>
+		</div>
+		<div class="cdiv"></div>
+		<div class="ListTable">
+		<table cellpadding="0" cellspacing="0" border="0">
+				<colgroup>
+					<col>
+				</colgroup>
+				<tr>
+					<th>Period</th>
+					<th>Target</th>
+					<th>College Application</th>
+					<th>Other Program</th>
+					<th>Comments</th> 	
+				</tr>
+				<tr>
+					<td>2013 ~ 2014</td>
+					<td>10</td>
+					<td>3</td>
+					<td>-</td>
+					<td>-</td>		
+				</tr>
+				<tr>
+					<td>2014 ~ 2015</td>
+					<td>10</td>
+					<td>3</td>
+					<td>-</td>
+					<td>-</td>				
+				</tr>
+				<tr>
+					<td>2015 ~ 2016</td>
+					<td>10</td>
+					<td>3</td>
+					<td>-</td>
+					<td>-</td>				
+				</tr>
+				<tr>
+					<td>2016 ~ 2017</td>
+					<td>10</td>
+					<td>3</td>
+					<td>-</td>
+					<td>-</td>			
+				</tr>
+				<tr>
+					<td>2017 ~ 2018</td>
+					<td>10</td>
+					<td>3</td>
+					<td>-</td>
+					<td>-</td>			
+				</tr>
+			</table>
+		</div><!-- ListTable -->
+		<div class="EndPart"></div>
+
+
+
+	</div><!-- MainFrame -->
+</div><!--  ContentsFrame-->
+</body>
+</html>
+
+<script>
+function MenuOpen() {
+	obj = document.getElementById('LeftF');
+
+	if (obj.style.margin == "0px 0px 0px -229px") {
+		document.getElementById('LeftF').style.margin='0px 0px 0px 0px';
+		document.getElementById('MToggle').style.transform='rotate(90deg)';
+		document.getElementById('MainF').style.width='calc(100% - 355px)';
+	} else {
+		document.getElementById('LeftF').style.margin='0px 0px 0px -229px';
+		document.getElementById('MToggle').style.transform='rotate(0deg)';
+		document.getElementById('MainF').style.width='calc(100% - 126px)';
+	}
+}
+</script>
