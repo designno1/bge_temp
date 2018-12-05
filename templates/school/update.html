@@ -977,6 +977,7 @@ document.getElementById(TabName).style.display='block';
 					<th>Grade</th>
 					<th>School</th>
 					<th>Home city</th>
+					<th></th>
 				</tr>
 				{% for review in current_student_reviews %}
 				<tr>
@@ -985,6 +986,7 @@ document.getElementById(TabName).style.display='block';
 					<td>{{review.grade}}</td>
 					<td>{{review.school.name}}</td>
 					<td>{{review.homecity}}</td>
+					<td><a href="javascrip:void(0);" class="Button">DEL</a></td>
 				</tr>
 				{% endfor %}
 			</table>
@@ -1015,6 +1017,7 @@ document.getElementById(TabName).style.display='block';
 					<th>Activities</th>
 					<th>College</th>
 					<th>Major</th>
+					<th></th>
 				</tr>
 				{% for profile in graduate_profiles %}
 				<tr>
@@ -1029,6 +1032,7 @@ document.getElementById(TabName).style.display='block';
 					<td>{{profile.activities}}</td>
 					<td>{{profile.college}}</td>
 					<td>{{profile.major}}</td>
+					<td><a href="javascrip:void(0);" class="Button">DEL</a></td>
 				</tr>
 				{% endfor %}
 			</table>
